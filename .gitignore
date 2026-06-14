@@ -12,6 +12,8 @@ data/*
 # local model cache
 .cache/
 *.faiss
+# but do ship the small demo index
+!data/faiss_index/index.faiss
 
 .DS_Store
 .pytest_cache/
