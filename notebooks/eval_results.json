@@ -1,0 +1,136 @@
+[
+  {
+    "question": "how do I reverse a list in python",
+    "answer": "```python\nmy_list = [1, 2, 3, 4, 5]\nreversed_list = my_list[::-1]\nprint(reversed_list)  # [5, 4, 3, 2, 1]\n```\nThis uses the same extended slice syntax as reversing a string [1].",
+    "grounded": true,
+    "sources": [
+      {
+        "title": "Reverse a string in Python",
+        "url": "https://stackoverflow.com/questions/931092"
+      },
+      {
+        "title": "Making a flat list out of list of lists in Python",
+        "url": "https://stackoverflow.com/questions/952914"
+      },
+      {
+        "title": "Remove items from a list while iterating in Python",
+        "url": "https://stackoverflow.com/questions/1207406"
+      },
+      {
+        "title": "How can I represent an 'Enum' in Python?",
+        "url": "https://stackoverflow.com/questions/36932"
+      }
+    ],
+    "latency_ms": 12178.2
+  },
+  {
+    "question": "what is the difference between is and == in python",
+    "answer": "The difference between `is` and `==` in Python is that `is` checks for identity (i.e., whether both variables point to the same object in memory), while `==` checks for equality (i.e., whether the values of both variables are the same) [1].\n\n```python\na = 'pub'\nb = ''.join(['p', 'u', 'b'])\nprint(a == b)  # True\nprint(a is b)  # False\n```\n\nIn this example, `a` and `b` have the same value, but they are not the same object in memory, so `a == b` returns `True`, but `a is b` returns `False`. \n\n`is` is equivalent to checking if the `id` of both variables is the same: `id(a) == id(b)` [1].",
+    "grounded": true,
+    "sources": [
+      {
+        "title": "Why does comparing strings in Python using either '==' or 'is' sometimes produce a different result?",
+        "url": "https://stackoverflow.com/questions/1504717"
+      },
+      {
+        "title": "Differences between isinstance() and type() in python",
+        "url": "https://stackoverflow.com/questions/1549801"
+      }
+    ],
+    "latency_ms": 1934.9
+  },
+  {
+    "question": "list comprehension vs map in python",
+    "answer": "**List Comprehension vs Map in Python**\n\nList comprehension and `map()` are both used to create new lists by performing operations on existing lists. Here's a comparison:\n\n```python\n# List comprehension\nnumbers = [1, 2, 3, 4, 5]\nsquared_numbers = [x**2 for x in numbers]\nprint(squared_numbers)  # [1, 4, 9, 16, 25]\n\n# Map\nnumbers = [1, 2, 3, 4, 5]\nsquared_numbers = list(map(lambda x: x**2, numbers))\nprint(squared_numbers)  # [1, 4, 9, 16, 25]\n```\n\nBoth achieve the same result, but list comprehension is generally more readable and flexible. `map()` is more functional and can be used with multiple iterables.\n\n**When to use each:**\n\n* Use list comprehension when you need to perform a simple transformation on a list.\n* Use `map()` when you need to apply a function to multiple iterables or when you want to use a more functional programming style.\n\nNote: In Python 3, `map()` returns a map object, which is an iterable. To get a list, you need to use the `list()` function to convert it. [1]",
+    "grounded": true,
+    "sources": [
+      {
+        "title": "Create a dictionary with list comprehension in Python",
+        "url": "https://stackoverflow.com/questions/1747817"
+      },
+      {
+        "title": "Python progression path - From apprentice to guru",
+        "url": "https://stackoverflow.com/questions/2573135"
+      },
+      {
+        "title": "What's the difference between list and tuples?",
+        "url": "https://stackoverflow.com/questions/626759"
+      },
+      {
+        "title": "What does the \"yield\" keyword do?",
+        "url": "https://stackoverflow.com/questions/231767"
+      }
+    ],
+    "latency_ms": 1090.6
+  },
+  {
+    "question": "decorators",
+    "answer": "**Creating a Chain of Function Decorators in Python**\n\nTo create a chain of function decorators in Python, you can simply stack them on top of each other. Here's an example:\n\n```python\ndef decorator1(func):\n    def wrapper():\n        print(\"Decorator 1\")\n        func()\n    return wrapper\n\ndef decorator2(func):\n    def wrapper():\n        print(\"Decorator 2\")\n        func()\n    return wrapper\n\n@decorator1\n@decorator2\ndef my_function():\n    print(\"My function\")\n\nmy_function()\n```\n\nThis will output:\n```\nDecorator 1\nDecorator 2\nMy function\n```\n\nAs you can see, the decorators are applied in the order they are stacked. [1]\n\n**Handcrafted Decorators**\n\nIf you want to create a decorator manually, you can do so by defining a function that takes another function as an argument and returns a wrapper function. Here's an example:\n\n```python\ndef my_shiny_new_decorator(a_function_to_decorate):\n    def the_wrapper_around_the_original_function():\n        print(\"Before the function runs\")\n        a_function_to_decorate()\n    return the_wrapper_around_the_original_function\n\ndef scream():\n    print(\"Yes!\")\n\nscream = my_shiny_new_decorator(scream)\nscream()\n```\n\nThis will output:\n```\nBefore the function runs\nYes!\n```\n\n**Decorating a Decorator**\n\nYou can also decorate a decorator using another decorator. Here's an example:\n\n```python\ndef decorator_with_args(decorator_to_enhance):\n    def decorator_maker(*args, **kwargs):\n        # ...\n        return decorator_to_enhance\n    return decorator_maker\n\ndef my_decorator(func):\n    def wrapped():\n        print(\"I am the wrapper around the decorated function.\")\n        return func()\n    return wrapped\n\nnew_decorator = decorator_with_args(my_decorator)\n```\n\nNote that this is a more advanced topic and requires a good understanding of decorators and function arguments. [2]\n\n**Best Practices**\n\nWhen using decorators, keep in mind the following best practices:\n\n* Decorators slow down the function call.\n* You cannot un-decorate a function.\n* Decorators wrap functions, which can make them hard to debug.\n\nIt's also important to note that decorators were introduced in Python 2.4, so make sure your code will be run on >= 2.4. [4]",
+    "grounded": true,
+    "sources": [
+      {
+        "title": "How to make a chain of function decorators in Python?",
+        "url": "https://stackoverflow.com/questions/739654"
+      }
+    ],
+    "latency_ms": 1382.1
+  },
+  {
+    "question": "how do I drop rows with NaN in a pandas dataframe",
+    "answer": "I don't have a grounded answer for how to drop rows with NaN in a pandas dataframe, as the provided context [1] to [4] does not cover this topic.",
+    "grounded": true,
+    "sources": [
+      {
+        "title": "Renaming columns in pandas",
+        "url": "https://stackoverflow.com/questions/11346283"
+      },
+      {
+        "title": "How do I connect to a MySQL Database in Python?",
+        "url": "https://stackoverflow.com/questions/372885"
+      },
+      {
+        "title": "How to remove an element from a list by index in Python?",
+        "url": "https://stackoverflow.com/questions/627435"
+      }
+    ],
+    "latency_ms": 511.1
+  },
+  {
+    "question": "why do I get an IndentationError in python",
+    "answer": "I don't have a grounded answer. The provided context [1], [2], [3], [4] does not cover the question about IndentationError in Python.",
+    "grounded": true,
+    "sources": [
+      {
+        "title": "Manually raising (throwing) an exception in Python",
+        "url": "https://stackoverflow.com/questions/2052390"
+      },
+      {
+        "title": "Is there a way to substring a string in Python?",
+        "url": "https://stackoverflow.com/questions/663171"
+      },
+      {
+        "title": "Difference between __str__ and __repr__ in Python",
+        "url": "https://stackoverflow.com/questions/1436703"
+      },
+      {
+        "title": "Does Python have a string contains substring method?",
+        "url": "https://stackoverflow.com/questions/3437059"
+      }
+    ],
+    "latency_ms": 362.6
+  },
+  {
+    "question": "how do I deploy a django app to aws",
+    "answer": "I don't have a grounded answer for that in my Stack Overflow sources. Try rephrasing it as a Python question, or ask something closer to common data-science topics.",
+    "grounded": false,
+    "sources": [],
+    "latency_ms": 21.1
+  },
+  {
+    "question": "what is the capital of france",
+    "answer": "I don't have a grounded answer for that in my Stack Overflow sources. Try rephrasing it as a Python question, or ask something closer to common data-science topics.",
+    "grounded": false,
+    "sources": [],
+    "latency_ms": 10.6
+  }
+]
