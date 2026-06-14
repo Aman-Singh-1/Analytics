@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+
+data/*
+!data/.gitkeep
+# ship the small demo index so the deploy has something to load
+!data/faiss_index/
+!data/faiss_index/**
+
+# local model cache
+.cache/
+*.faiss
+
+.DS_Store
+.pytest_cache/
