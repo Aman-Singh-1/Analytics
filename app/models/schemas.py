@@ -1,10 +1,11 @@
-from typing import Optional
+from typing import Annotated, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, StringConstraints
 
 
 class AskRequest(BaseModel):
-    question: str = Field(min_length=3)
+    # strip first so whitespace-only input collapses to empty and fails min_length
+    question: Annotated[str, StringConstraints(strip_whitespace=True, min_length=3)]
     # TODO: per-request top_k override isn't wired into the retriever yet.
     top_k: Optional[int] = None
 
